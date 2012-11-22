@@ -9,13 +9,14 @@ And the Python Stylus depends on [Node](http://nodejs.org) and [Stylus](http://l
 
 So you need install nodejs and stylus node package before .
 
-#Usage
 
-First:
+#Install
 
 ```
 pip install live-stylus
 ```
+
+#Usage 
 
 For example , in a flask project :
 
