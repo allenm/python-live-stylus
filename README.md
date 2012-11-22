@@ -40,6 +40,7 @@ if __name__ == "__main__":
 ```
 
 Then when you modify a .styl file , it will be converted to a same name css file immediately.
+eg. css/global.styl => css/global.css
 
 If you use other web framwork , just put the ConvStylus() before the .run() or .start() code.
 
