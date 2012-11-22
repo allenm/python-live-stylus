@@ -8,7 +8,7 @@ with io.open('README') as description_file:
 
 setup(
     name = "live_stylus",
-    version = "0.2.5",
+    version = "0.2.6",
     author = "Allen.M",
     author_email = "menghonglun@gmail.com",
     description = "Convert stylus to css real time. Easily used by any web framwork.",
