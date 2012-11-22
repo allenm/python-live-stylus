@@ -1,7 +1,7 @@
 live-py-stylus
 ==============
 
-Convert stylus to css real time. Easily used by any web framwork.
+Convert stylus to css real time. Easily used with any web framwork.
 
 It depends on the Python Stylus: https://github.com/bkad/python-stylus
 
