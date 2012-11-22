@@ -8,13 +8,13 @@ with io.open('README') as description_file:
 
 setup(
     name = "live_stylus",
-    version = "0.2.6",
+    version = "0.2.7",
     author = "Allen.M",
     author_email = "menghonglun@gmail.com",
     description = "Convert stylus to css real time. Easily used by any web framwork.",
     license = "MIT",
     keywords = "stylus css",
-    url = "https://github.com/allenm/live-py-stylus",
+    url = "https://github.com/allenm/python-live-stylus",
     packages = ["live_stylus"],
     long_description= long_description ,
     classifiers=[
