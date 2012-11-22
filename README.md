@@ -4,7 +4,9 @@ live-py-stylus
 Convert stylus to css real time. Easily used by any web framwork.
 
 It depends on the Python Stylus: https://github.com/bkad/python-stylus
+
 And the Python Stylus depends on [Node](http://nodejs.org) and [Stylus](http://learnboost.github.com/stylus/)
+
 So you need install nodejs and stylus node package before .
 
 For example , in a flask project :
