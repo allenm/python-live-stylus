@@ -58,4 +58,4 @@ If you have any questions, please feel free to ask through [New Issue](https://g
 
 ## License
 
-SeaJS is available under the terms of the [MIT License](http://seajs.org/LICENSE.md).
+live-py-stylus is available under the terms of the [MIT License](http://seajs.org/LICENSE.md).
