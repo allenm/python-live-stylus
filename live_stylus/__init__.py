@@ -6,7 +6,7 @@
 #/
 
 from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler 
+from watchdog.events import FileSystemEventHandler 
 from stylus import Stylus
 import threading
 import sys
@@ -17,30 +17,40 @@ import fnmatch
 
 compiler = Stylus()
 
-class FileChange( PatternMatchingEventHandler ):
+def compileFile( filename ):
+    if os.path.isfile( filename ) and fnmatch.fnmatch( filename , '*.styl' ):
+        stylusFile = open( filename, 'r' )
+        content = stylusFile.read()
+        stylusFile.close()
+        result = compiler.compile( content )
+        print 'Compile the file: %s' % ( filename )
+        resultPath = filename[0:-4] + 'css'
+        cssFile = open( resultPath , 'w' )
+        cssFile.write( result )
+        cssFile.close()
+
+def compileDir( path ):
+    ''' convert all the sylus file one time in the starting '''
+    matches = []
+    for root , dirnames, filenames in os.walk( path ):
+        for filename in fnmatch.filter( filenames , '*.styl'):
+            matches.append( os.path.join( root , filename ) )
+
+    for filename in matches :
+        compileFile( filename )
+
+
+class FileChange( FileSystemEventHandler ):
     ''' File change event handler , capture the *.styl file change event '''
 
     def __init__(self):
-        super( FileChange, self ).__init__( patterns = ('*.styl',) )
+        super( FileChange, self ).__init__()
 
     def on_any_event(self, event):
         if event.is_directory is False:
-            CompileStylus( event.src_path )
-
-class CompileStylus:
-
-    def __init__(self, path ):
-        if os.path.isfile( path ):
-            stylusFile = open( path, 'r' )
-            content = stylusFile.read()
-            stylusFile.close()
-            result = compiler.compile( content )
-            print 'Compile the file: %s' % ( path )
-            resultPath = path[0:-4] + 'css'
-            cssFile = open( resultPath , 'w' )
-            cssFile.write( result )
-            cssFile.close()
-
+            compileFile( event.src_path )
+        else:
+            compileDir( event.src_path )
 
 
 class Watch( threading.Thread ):
@@ -50,7 +60,7 @@ class Watch( threading.Thread ):
         if path is None:
             path = os.path.dirname(os.path.realpath(sys.argv[0]))
         self.path = path
-        self.convertAll()
+        compileDir( self.path )
 
 
     def run( self ):
@@ -59,16 +69,6 @@ class Watch( threading.Thread ):
         observer.schedule(event_handler, path= self.path, recursive=True)
         observer.start()
         print 'start watching %s directory stylus file' % (self.path)
-
-    def convertAll(self):
-        ''' convert all the sylus file one time in the starting '''
-        matches = []
-        for root , dirnames, filenames in os.walk( self.path ):
-            for filename in fnmatch.filter( filenames , '*.styl'):
-                matches.append( os.path.join( root , filename ) )
-
-        for filename in matches :
-            CompileStylus( filename )
 
 class ConvStylus:
     def __init__(self, path = None ):

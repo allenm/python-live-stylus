@@ -1,26 +1,26 @@
 #!/usr/bin/env python
 
-import os
+import io
 from setuptools import setup
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+with io.open('README') as description_file:
+  long_description = description_file.read()
 
 setup(
     name = "live_stylus",
-    version = "0.1",
+    version = "0.2.4",
     author = "Allen.M",
     author_email = "menghonglun@gmail.com",
     description = "Convert stylus to css real time. Easily used by any web framwork.",
-    licence = "MIT",
+    license = "MIT",
     keywords = "stylus css",
     url = "https://github.com/allenm/live-py-stylus",
     packages = ["live_stylus"],
-    long_description=read('README.md'),
+    long_description= long_description ,
     classifiers=[
         "Development Status :: 4 - Beta",
         "Topic :: Utilities",
-        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: MIT License"
     ],
     install_requires=["stylus","watchdog"]
 )
